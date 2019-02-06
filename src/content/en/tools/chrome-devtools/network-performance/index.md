@@ -106,15 +106,27 @@ To view the network activity that a page causes:
        </figcaption>
      </figure>
 
-     Each row of the **Network Log** represents a resource.
+     Each row of the **Network Log** represents a resource. By default the resources are
+     listed chronologically. The top resource is usually the
+     main HTML document. The bottom resource is whatever was requested last.
 
-     Each column represents information about that resource. TODO Status, Type, Initiator
+     Each column represents information about a resource. **Figure X** shows the default
+     columns:
 
-     By default the resources are listed chronologically. The network activity for the top
-     resource initiated first, and the network activity for the bottom resource initiated last.
+     * **Status**. The HTTP response code.
+     * **Type**. The resource type.
+     * **Initiator**. What caused a resource to be requested. Clicking an Initiator link
+       takes you to the source code that caused the request.
+     * **Time**. How long the request took.
+     * **Waterfall**. A graphical representation of the different stages of the request.
+       Hover over a Waterfall to see a breakdown.
 
-     When inspecting page load network activity, the top resource is usually the network request
-     for the main HTML document.
+     <aside class="note">
+       <b>Note</b> The graph above the Network Log is called the Overview. You won't
+       be using it in this tutorial, so you can hide it if you prefer. See <a
+       href="/web/tools/chrome-devtools/network-performance/reference#hide-overview">Hide
+       the Overview pane</a>.
+     </aside>
 
 1. So long as you've got DevTools open, it will record network activity in the Network Log.
    To demonstrate this, first look at the bottom of the **Network Log** and make a mental
@@ -122,6 +134,14 @@ To view the network activity that a page causes:
 1. Now, click the **Get Data** button in the demo.
 1. Look at the bottom of the **Network Log** again. There's a new resource called
    `getstarted.json`. Clicking the **Get Data** button caused the page to request this file.
+
+     <figure>
+       <img src="/web/tools/chrome-devtools/network-performance/imgs/tutorial/runtime.png"
+            alt="A new resource in the Network Log"/>
+       <figcaption>
+         <b>Figure X</b>. A new resource in the Network Log
+       </figcaption>
+     </figure>
 
 ## Show more information {: #information }
 
@@ -131,8 +151,17 @@ There are also many columns that are hidden by default which you may find useful
 1. Right-click the header of the Network Log table and select **Domain**. The domain of
    each resource is now shown.
 
+     <figure>
+       <img src="/web/tools/chrome-devtools/network-performance/imgs/tutorial/domain.png"
+            alt="Enabling the Domain column"/>
+       <figcaption>
+         <b>Figure X</b>. Enabling the Domain column
+       </figcaption>
+     </figure>
+
 <aside class="objective">
-  <b>Tip!</b> You can see the full URL of a resource by hovering over its name.
+  <b>Tip</b> You can see the full URL of a resource by hovering over its cell in the
+  <b>Name</b> column.
 </aside>
 
 ## Simulate a slower network connection {: #throttle }
@@ -142,9 +171,35 @@ faster than the network connections of the mobile devices of your users. By thro
 the page you can get a better idea of how long a page takes to load on a mobile device.
 
 1. Click the **Throttling** dropdown, which is probably set to **Online**.
+
+     <figure>
+       <img src="/web/tools/chrome-devtools/network-performance/imgs/tutorial/throttling.png"
+            alt="Enabling throttling"/>
+       <figcaption>
+         <b>Figure X</b>. Enabling throttling
+       </figcaption>
+     </figure>
+
 1. Select **Slow 3G**.
+
+     <figure>
+       <img src="/web/tools/chrome-devtools/network-performance/imgs/tutorial/slow3g.png"
+            alt="Selecting Slow 3G"/>
+       <figcaption>
+         <b>Figure X</b>. Selecting Slow 3G
+       </figcaption>
+     </figure>
+
 1. Long-press **Reload** ![Reload][reload]{: .inline-icon }
    and then select **Empty Cache And Hard Reload**.
+
+     <figure>
+       <img src="/web/tools/chrome-devtools/network-performance/imgs/tutorial/hardreload.png"
+            alt="Empty Cache And Hard Reload"/>
+       <figcaption>
+         <b>Figure X</b>. Empty Cache And Hard Reload
+       </figcaption>
+     </figure>
 
 [cache]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
 
@@ -153,11 +208,10 @@ the page you can get a better idea of how long a page takes to load on a mobile 
      the network for all resources. This is helpful when you want to see how a first-time
      visitor experiences a page load.
 
-<aside class="objective">
-  <b>Tip!</b> See <a href="/web/tools/chrome-devtools/device-mode/">Simulate Mobile Devices
-  With Device Mode</a> to discover other DevTools features related to simulating
-  mobile devices, such as overriding geolocation and simulating device orientations.
-</aside>
+     <aside class="note">
+       <b>Note</b> The <b>Empty Cache And Hard Reload</b> workflow is only available when
+       DevTools is open.
+     </aside>
 
 ## Inspect a resource's details {: #details }
 
