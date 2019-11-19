@@ -3,7 +3,7 @@ book_path: /web/tools/workbox/_book.yaml
 description: The module guide for workbox-routing.
 
 {# wf_blink_components: N/A #}
-{# wf_updated_on: 2018-08-10 #}
+{# wf_updated_on: 2019-07-10 #}
 {# wf_published_on: 2017-11-27 #}
 
 # Workbox Strategies {: .page-title }
@@ -22,12 +22,12 @@ but you can [learn more in the Offline Cookbook](/web/fundamentals/instant-and-o
 
 ## Using Strategies
 
-In the following examples we’ll show you how to use the Workbox caching
+In the following examples, we’ll show you how to use the Workbox caching
 strategies with `workbox-routing`. There are some options you can define with
-each strategy that is covered in the
+each strategy that are covered in the
 [Configuring Strategies section of this doc](#configuring_strategies).
 
-In the [Advanced Usage section](#advanced_usage) we’ll cover how you can use
+In the [Advanced Usage section](#advanced_usage), we’ll cover how you can use
 the caching strategies directly without `workbox-routing`.
 
 ### Stale-While-Revalidate
@@ -35,7 +35,7 @@ the caching strategies directly without `workbox-routing`.
 ![Stale While Revalidate Diagram](../images/modules/workbox-strategies/stale-while-revalidate.png)
 
 The [stale-while-revalidate](/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate)
-pattern allows you to respond the request as quickly as possible with a
+pattern allows you to respond to the request as quickly as possible with a
 cached response if available, falling back to the network request if it’s
 not cached. The network request is then used to update the cache.
 
@@ -45,7 +45,7 @@ is not vital to the application.
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/images/avatars/'),
-  workbox.strategies.staleWhileRevalidate()
+  new workbox.strategies.StaleWhileRevalidate()
 );
 ```
 
@@ -59,14 +59,14 @@ non-critical and can be gradually cached, a
 is the best option.
 
 If there is a Response in the cache, the Request will be fulfilled using the
-cached response, the network will not be used at all. If there isn't a cached
-response, the Request will be fulfilled by a a network request and the response
+cached response and the network will not be used at all. If there isn't a cached
+response, the Request will be fulfilled by a network request and the response
 will be cached so that the next request is served directly from the cache.
 
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/styles/'),
-  workbox.strategies.cacheFirst()
+  new workbox.strategies.CacheFirst()
 );
 ```
 
@@ -76,15 +76,15 @@ workbox.routing.registerRoute(
 
 For requests that are updating frequently, the
 [network first](/web/fundamentals/instant-and-offline/offline-cookbook/#network-falling-back-to-cache)
-strategy is the ideal solution. By default it will try and fetch the latest
-request from the network. If the request is successful, it’ll put the response
-in the cache. If the network fails to return a response, the caches response
+strategy is the ideal solution. By default, it will try to fetch the latest
+response from the network. If the request is successful, it’ll put the response
+in the cache. If the network fails to return a response, the cached response
 will be used.
 
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/social-timeline/'),
-  workbox.strategies.networkFirst()
+  new workbox.strategies.NetworkFirst()
 );
 ```
 
@@ -99,7 +99,7 @@ is the strategy to use.
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/admin/'),
-  workbox.strategies.networkOnly()
+  new workbox.strategies.NetworkOnly()
 );
 ```
 
@@ -108,13 +108,13 @@ workbox.routing.registerRoute(
 ![Cache Only Diagram](../images/modules/workbox-strategies/cache-only.png)
 
 The [cache only](/web/fundamentals/instant-and-offline/offline-cookbook/#cache-only)
-strategy ensures that requests are obtained from a cache. This is less common
+strategy ensures that responses are obtained from a cache. This is less common
 in workbox, but can be useful if you have your own precaching step.
 
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/app/v2/'),
-  workbox.strategies.cacheOnly()
+  new workbox.strategies.CacheOnly()
 );
 ```
 
@@ -134,7 +134,7 @@ useful if you want to separate out your assets to help with debugging.
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/images/'),
-  workbox.strategies.cacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: 'image-cache',
   })
 );
@@ -154,7 +154,7 @@ instances to the `plugins` option.
 ```javascript
 workbox.routing.registerRoute(
   new RegExp('/images/'),
-  workbox.strategies.cacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: 'image-cache',
     plugins: [
       new workbox.expiration.Plugin({
@@ -170,10 +170,10 @@ workbox.routing.registerRoute(
 
 ## Advanced Usage
 
-If you want to use the strategies in your own fetch event logic you can use
+If you want to use the strategies in your own fetch event logic, you can
 use the strategy classes to run a request through a specific strategy.
 
-For example, to implement the stale-while-revalidate class you can do the
+For example, to use the stale-while-revalidate strategy, you can do the
 following:
 
 ```javascript

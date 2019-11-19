@@ -3,16 +3,16 @@ book_path: /web/tools/workbox/_book.yaml
 description: The module guide for workbox-sw.
 
 {# wf_blink_components: N/A #}
-{# wf_updated_on: 2018-08-16 #}
+{# wf_updated_on: 2019-07-08 #}
 {# wf_published_on: 2017-11-27 #}
 
 # Workbox {: .page-title }
 
 ## What is Workbox SW?
 
-The `workbox-sw` module provide an extremely easy way to get up and running
-with the Workbox modules and simplifies the loading of the Workbox modules and
-offers some simply helper methods.
+The `workbox-sw` module provides an extremely easy way to get up and running
+with the Workbox modules, simplifies the loading of the Workbox modules, and
+offers some simple helper methods.
 
 You can use `workbox-sw` via our CDN or you use it with a set of workbox files
 on your own server.
@@ -87,12 +87,12 @@ importScripts('{% include "web/tools/workbox/_shared/workbox-sw-cdn-url.html" %}
 
 // This will work!
 workbox.routing.registerRoute(
-  new RegExp('\.png$'),
-  workbox.strategies.cacheFirst()
+  new RegExp('\\.png$'),
+  new workbox.strategies.CacheFirst()
 );
 </pre>
 
-But this code could be a problem if you have not referenced `workbox.strategies` elsewhere in your
+But the code below could be a problem if you have not referenced `workbox.strategies` elsewhere in your
 service worker:
 
 <pre class="prettyprint js">
@@ -102,7 +102,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.url.endsWith('.png')) {
     // Oops! This causes workbox-strategies.js to be imported inside a fetch handler,
     // outside of the initial, synchronous service worker execution.
-    const cacheFirst = workbox.strategies.cacheFirst();
+    const cacheFirst = new workbox.strategies.CacheFirst();
     event.respondWith(cacheFirst.makeRequest({request: event.request}));
   }
 });
@@ -121,7 +121,7 @@ workbox.loadModule('workbox-strategies');
 self.addEventListener('fetch', (event) => {
   if (event.request.url.endsWith('.png')) {
     // Referencing workbox.strategies will now work as expected.
-    const cacheFirst = workbox.strategies.cacheFirst();
+    const cacheFirst = new workbox.strategies.CacheFirst();
     event.respondWith(cacheFirst.makeRequest({request: event.request}));
   }
 });
@@ -139,7 +139,7 @@ const {strategies} = workbox;
 self.addEventListener('fetch', (event) => {
   if (event.request.url.endsWith('.png')) {
     // Using the previously-initialized strategies will work as expected.
-    const cacheFirst = strategies.cacheFirst();
+    const cacheFirst = new strategies.CacheFirst();
     event.respondWith(cacheFirst.makeRequest({request: event.request}));
   }
 });
@@ -152,38 +152,18 @@ a change to start disallowing this usage, bringing it in line with what other br
 
 ## Force Use of Debug or Production Builds
 
-All of the Workbox modules come with two builds, a debug build which is
+All of the Workbox modules come with two builds, a debug build which
 contains logging and additional type checking and a production build which
 strips the logging and type checking.
 
 By default, `workbox-sw` will use the debug build for sites on localhost,
 but for any other origin it’ll use the production build.
 
-If you want to force debug or production builds you set the `debug` config
-option.
+If you want to force debug or production builds, you can set the `debug` config
+option:
 
 <pre class="prettyprint js">
 workbox.setConfig({
-  debug: <true or false>
+  debug: &lt;true or false&gt;
 });
 </pre>
-
-## Skip Waiting and Clients Claim
-
-Some developers want to be able to publish a new service worker and have it
-update and control a web page as soon as possible, skipping the default
-[service worker lifecycle](/web/fundamentals/primers/service-workers/lifecycle).
-
-If you find yourself wanting this behavior, `workbox-sw` provides some helper
-methods to make this easy:
-
-<pre class="prettyprint js">
-workbox.skipWaiting();
-workbox.clientsClaim();
-</pre>
-
-Note: If your web app lazy-loads resources that are uniquely versioned with, e.g., hashes in their
-URLs, it's recommended that you avoid using skip waiting. Enabling it could
-[lead to failures](https://stackoverflow.com/questions/51715127)
-when lazily-loading URLs that were previously precached and were purged during an updated service
-worker's activation.

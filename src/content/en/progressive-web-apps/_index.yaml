@@ -39,7 +39,7 @@ landing_page:
           This new level of quality allows Progressive Web Apps to earn a
           place on the user's home screen.
         </p>
-      youtube_id: m-sCdS0sQO8
+      youtube_id: 2KhRmFHLuhE
       # image_path: images/pwa-intro.png
 
   # - classname: devsite-landing-row-100
@@ -211,8 +211,7 @@ landing_page:
             <li>
               <a href="/web/progressive-web-apps/desktop">
                 Progressive Web Apps on Desktop
-              </a><br>Progressive Web Apps now work on the desktop, including
-              Chrome OS and Windows, with support for Mac and Linux coming soon.
+              </a><br>Progressive Web Apps now work on all desktop platforms.
             </li>
             <li>
               <a href="/web/fundamentals/app-install-banners">

@@ -2,14 +2,18 @@ project_path: /web/_project.yaml
 book_path: /web/updates/_book.yaml
 description: Adding 3D models to a website can be tricky for a variety of reasons including the hosting issues and the high bar of 3D programming. That's why we're introducing the &lt;model-viewer&gt; web component to let you use 3D models declaratively.
 
-{# wf_updated_on: 2019-02-04 #}
+{# wf_updated_on: 2019-05-02 #}
 {# wf_published_on: 2019-02-06 #}
-{# wf_tags: 3d #}
+{# wf_tags: 3d,model-viewer #}
 {# wf_featured_image: /web/updates/images/2019/02/space-suit.png #}
 {# wf_featured_snippet: Adding 3D models to a website can be tricky for a variety of reasons including the hosting issues and the high bar of 3D programming. That's why we're introducing the <code>&lt;model-viewer&gt;</code> web component to let you use 3D models declaratively. #}
 {# wf_blink_components: N/A #}
 
 # The model-viewer web component {: .page-title}
+
+Note: We're always [updating and improving](https://github.com/GoogleWebComponents/model-viewer/releases)
+`<model-viewer>`. Check out the [`<model-viewer>` homepage](https://googlewebcomponents.github.io/model-viewer/)
+to explore what it can do.
 
 {% include "web/_shared/contributors/josephmedley.html" %}
 
@@ -43,7 +47,7 @@ use it. In this article, I will show you some things that are particular to
 ## What can &lt;model-viewer> do?
 
 More specifically, what can it do now? I'll show you its current capabilities.
-You'll get Is a great experience today, and `<model-viewer> will get better
+You'll get a great experience today, and `<model-viewer>` will get better
 over time as we add new features and improve rendering quality. The examples
 I've provided are just to give you a sense of what it does. If you want to try
 them there are installation and usage instructions in [its GitHub
@@ -61,14 +65,16 @@ browser.
 
 To see <model-viewer> in action, check out our [demo hosted on
 Glitch](https://model-viewer.glitch.me/). The code we have so far looks
-something like this png.
+something like this:
 
 ![image](/web/updates/images/2019/02/space-suit.png)
 
-By adding two attributes, I can also make the model rotate and allow users to
-control it.
+With the `auto-rotate` and `controls` attributes I can provide motion and user
+control. The [examples show a complete list of attributes](https://googlewebcomponents.github.io/model-viewer/index.html).
 
-<model-viewer src="assets/Astronaut.gltf" controls auto-rotate>
+```html
+<model-viewer src="assets/Astronaut.gltf" **controls auto-rotate**>
+```
 
 ### Poster image/delayed loading
 

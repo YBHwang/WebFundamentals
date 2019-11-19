@@ -2,7 +2,7 @@ project_path: /web/_project.yaml
 book_path: /web/updates/_book.yaml
 description: A round up of the audio/video updates in Chrome 73: Hardware media keys support, HDCP policy check, Picture-in-Picture origin trials, and more.
 
-{# wf_updated_on: 2019-02-06 #}
+{# wf_updated_on: 2019-02-08 #}
 {# wf_published_on: 2019-02-06 #}
 {# wf_tags: news,chrome73,media #}
 {# wf_featured_image: /web/updates/images/generic/play-outline.png #}
@@ -65,8 +65,7 @@ accordingly.
 But wait, there’s more! With the [Media Session API] now available on desktop
 (it was supported on mobile only before), web developers can handle media
 related events such as track changing that are triggered by media keys. The
-events `previoustrack`, `nexttrack`, `seekbackward`, and `seekforward` are
-currently supported.
+events `previoustrack` and `nexttrack` are currently supported.
 
     navigator.mediaSession.setActionHandler('previoustrack', function() {
       // User hit "Previous Track" key.
@@ -74,14 +73,6 @@ currently supported.
 
     navigator.mediaSession.setActionHandler('nexttrack', function() {
       // User hit "Next Track" key.
-    });
-
-    navigator.mediaSession.setActionHandler('seekbackward', function() {
-      // User hit "Seek Backward" key.
-    });
-
-    navigator.mediaSession.setActionHandler('seekforward', function() {
-      // User hit "Seek Forward" key.
     });
 
 Play and pause keys are handled automatically by Chrome. However if the default
@@ -107,7 +98,7 @@ Check out our existing [developer documentation] and try out the [official Media
 Session samples].
 
 [Chromestatus Tracker](https://www.chromestatus.com/feature/5639924124483584) &#124;
-[Chromium Bug](hhttps://bugs.chromium.org/p/chromium/issues/detail?id=497735)
+[Chromium Bug](https://bugs.chromium.org/p/chromium/issues/detail?id=497735)
 
 ## Encrypted Media: HDCP Policy Check {: #hdcp }
 
@@ -213,7 +204,7 @@ pretty straightforward.
       // TODO: Stop ad and play video.
     }
 
-Note: Media session action handlers will persist. I’d suggest always reseting
+Note: Media session action handlers will persist. I’d suggest always resetting
 them when media playback starts and ends to avoid showing an unexpected "Skip
 Ad" button.
 

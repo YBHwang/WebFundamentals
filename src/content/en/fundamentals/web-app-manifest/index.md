@@ -2,7 +2,7 @@ project_path: /web/fundamentals/_project.yaml
 book_path: /web/fundamentals/_book.yaml
 description: The web app manifest is a JSON file that gives you the ability to control how your web app or site appears to the user in areas where they would expect to see native apps (for example, a device's home screen), direct what the user can launch, and define its appearance at launch.
 
-{# wf_updated_on: 2019-01-31 #}
+{# wf_updated_on: 2019-06-24 #}
 {# wf_published_on: 2016-02-11 #}
 {# wf_blink_components: Manifest #}
 
@@ -55,7 +55,13 @@ prompt.
 When you have created the manifest, add a `link` tag to all the pages that
 encompass your web app:
 
-    <link rel="manifest" href="/manifest.json">
+```html
+<link rel="manifest" href="/manifest.json">
+```
+
+The request for the manifest is made **without** any credentials (even if it's
+on the same domain), thus if the manifest requires credentials, you must
+include `crossorigin="use-credentials"` in the manifest tag.
 
 ## Key manifest properties
 
@@ -149,10 +155,10 @@ to go completely full screen.
     <tr>
       <td><code>minimal-ui</code></td>
       <td>
-        <b>Not supported by Chrome</b><br>
         This mode is similar to <code>fullscreen</code>, but provides the
         user with some means to access a minimal set of UI elements for
-        controlling navigation (i.e., back, forward, reload, etc).
+        controlling navigation (i.e., back, forward, reload, etc).<br>
+        <b>Note:</b> Only supported by Chrome on mobile.
       </td>
     </tr>
     <tr>
@@ -184,7 +190,7 @@ your web app. Your `start_url` must reside within the `scope`.
     "scope": "/maps/"
 
 Caution: If the user clicks a link in your app that navigates outside of the
-`scope`, the link will open and render within the existing the PWA window. If
+`scope`, the link will open and render within the existing PWA window. If
 you want the link to open in a browser tab, you must add `target="_blank"`
 to the `<a>` tag. On Android, links with `target="_blank"` will open in a
 Chrome Custom Tab.
@@ -243,12 +249,6 @@ no scaling will be applied to the image.
 
 Again, providing a 192px and a 512px icon will be sufficient for most cases,
 but you can provide additional icons as necessary.
-
-<div class="clearfix"></div>
-
-## Feedback {: .hide-from-toc }
-
-{% include "web/_shared/helpful.html" %}
 
 <div class="clearfix"></div>
 

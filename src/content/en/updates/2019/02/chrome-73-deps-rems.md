@@ -2,11 +2,11 @@ project_path: /web/_project.yaml
 book_path: /web/updates/_book.yaml
 description: A round up of the deprecations and removals in Chrome 73 to help you plan.
 
-{# wf_updated_on: 2019-02-07 #}
+{# wf_updated_on: 2019-10-23 #}
 {# wf_published_on: 2019-02-07 #}
 {# wf_tags: deprecations,removals,chrome73 #}
 {# wf_blink_components: Blink>Storage>WebSQL,Blink>HTML,Blink #}
-{# wf_featured_image: /web/updates/images/generic/warning.png #}
+{# wf_featured_image: /web/updates/images/generic/deps-rems.jpg #}
 {# wf_featured_snippet: A round up of the deprecations and removals in Chrome 73 to help you plan.#}
 
 {% include "web/updates/_shared/see-all-dep-rem.html" %}
@@ -44,6 +44,8 @@ version 73, Chrome no longer does this either.
 
 ## Deprecations
 
+{% include "web/updates/_shared/deprecations.html" %}
+
 ### Deprecate 'drive-by downloads' in sandboxed iframes
 
 Chrome has deprecated downloads in sandboxed iframes that lack a user gesture
@@ -60,7 +62,7 @@ experience for a click to trigger a download on the same page, compared with
 downloads started automatically when landing at a new page, or started non
 spontaneously after the click.
 
-Removal is expected in Chrome 74.
+Removal is expected in Chrome 81.
 
 [Chrome Platform Status](https://www.chromestatus.com/feature/5706745674465280) &#124;
 
